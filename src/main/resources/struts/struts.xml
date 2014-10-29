@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<!--
+		<constant name="struts.objectFactory"
+		value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+    -->
+    <!-- action 注解约定配置 -->
+    <constant name="struts.convention.default.parent.package" value="crud-default"/>
+    <constant name="struts.convention.package.locators.basePackage" value="com.qoocc.admin"/>
+    <constant name="struts.convention.package.locators" value="view"/>
+    
+	<!-- 该属性指定Struts 2中的action由Spring容器创建  -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 当struts的配置文件修改后，系统是否自动重新加载该文件，默认值为false（生产环境下使用），开发阶段最好打开 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 开发模式下使用，这样可以打印出更详细的错误信息 -->
+	<constant name="struts.devMode" value="false" />
+	<!-- 设置浏览器是否缓存静态内容，默认值为true（生产环境下使用），开发阶段最好关闭 -->
+	<constant name="struts.serve.static.browserCache " value="false" />
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.multipart.maxSize" value="1100000000" />
+	<constant name="struts.multipart.saveDir" value="d:/saveDir"/>
+	<constant name="struts.multipart.parser" value="jakarta"></constant>
+	<!-- 默认的视图主题 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.ui.templateDir" value="template" />
+	<constant name="struts.ui.templateSuffix" value="ftl" />
+     
+    <!-- 用于CRUD Action的parent package 只后台需要 -->
+    <package name="crud-default" extends="convention-default">
+        <!-- tiles -->
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+        </result-types>
+        <!-- 基于paramsPrepareParamsStack,
+                                           增加store interceptor保证actionMessage在redirect后不会丢失 -->
+        <interceptors>
+            <interceptor-stack name="crudStack">
+                <interceptor-ref name="store">
+                    <param name="operationMode">AUTOMATIC</param>
+                </interceptor-ref>
+                <interceptor-ref name="paramsPrepareParamsStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="crudStack"/>
+
+        <global-results>
+            <!--            <result name="exception" type="tiles">security.error</result>-->
+            <result name="glb_message" type="tiles">
+                 system.glb.message
+            </result>
+
+            <result name="global_message">/WEB-INF/content/admin/common/global_message.jsp</result>
+        </global-results>
+    </package>
+</struts>    

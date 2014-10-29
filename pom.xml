@@ -18,7 +18,7 @@
 			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
 		</dependency>
 
-		
+
 		<!-- solr客户端 -->
 		<dependency>
 			<groupId>org.apache.solr</groupId>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.4</version>
 		</dependency>
 		<!-- 测试框架 -->
 
@@ -70,6 +70,15 @@
 		</dependency>
 		<!-- 字符串等常见操作工具类 -->
 
+		<!-- bean 操作工具类 -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<!-- bean 操作工具类 -->
+
+
 		<!-- redis数据库操作SDK -->
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -90,8 +99,8 @@
 		<!-- Hibernate、Spring、Struts2包Start -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>3.3.2.GA</version>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.4.0.GA</version>
 		</dependency>
 
 		<!-- spring 包 start -->
@@ -120,24 +129,30 @@
 			<artifactId>xwork</artifactId>
 			<version>2.1.3</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-core</artifactId>
-			<version>${org.apache.struts.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-convention-plugin</artifactId>
-			<version>${org.apache.struts.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-spring-plugin</artifactId>
-			<version>${org.apache.struts.version}</version>
-		</dependency>
 		<!-- Struts2包End -->
 		<!-- Hibernate、Spring、Struts2包End -->
 
+		<!-- 数据库相关包 -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.31</version>
+		</dependency>
+		<!-- 数据库相关包 -->
+
+
+		<!-- 动态代理类库 -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<!-- 动态代理类库 -->
 	</dependencies>
 	<!-- 包依赖配置 -->
 
