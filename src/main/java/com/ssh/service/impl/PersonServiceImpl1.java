@@ -22,8 +22,9 @@ import com.ssh.service.PersonService;
  */
 @Service
 @Transactional(isolation = Isolation.READ_UNCOMMITTED)
-public class PersonServiceImpl implements PersonService {
-	@Resource(name = "personDaoImpl")
+public class PersonServiceImpl1 implements PersonService {
+
+	@Resource(name = "personDaoImpl1")
 	private PersonDao personDao;
 
 	/*

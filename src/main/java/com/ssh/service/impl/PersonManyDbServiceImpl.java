@@ -22,10 +22,15 @@ import com.ssh.service.PersonService;
  */
 @Service
 @Transactional(isolation = Isolation.READ_UNCOMMITTED)
-public class PersonServiceImpl implements PersonService {
+public class PersonManyDbServiceImpl implements PersonService {
+
+	@Resource(name = "personDaoImpl1")
+	private PersonDao personDao1;
+
+	
 	@Resource(name = "personDaoImpl")
 	private PersonDao personDao;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -33,7 +38,12 @@ public class PersonServiceImpl implements PersonService {
 	 */
 	@Override
 	public boolean addPerson(Person person) {
+		this.personDao1.addPerson(person);
 		this.personDao.addPerson(person);
+//		String[] strArr=new String[1];
+//		strArr[1]="test";
+		
+		
 		return false;
 	}
 
