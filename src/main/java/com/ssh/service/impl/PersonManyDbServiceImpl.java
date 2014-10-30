@@ -40,10 +40,10 @@ public class PersonManyDbServiceImpl implements PersonService {
 	public boolean addPerson(Person person) {
 		this.personDao1.addPerson(person);
 		this.personDao.addPerson(person);
+		
 //		String[] strArr=new String[1];
 //		strArr[1]="test";
-		
-		
+	
 		return false;
 	}
 

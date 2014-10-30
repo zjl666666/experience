@@ -34,8 +34,9 @@ public class PersonDaoImpl extends CommonSimpleJdbcDaoImpl  implements PersonDao
 	 */
 	@Override
 	public Paging<Person> searchPersons(Paging<Person> paging) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql="select * from person";
+		Paging<Person> result= this.search(sql, paging, Person.class);
+		return result;
 	}
 
 }

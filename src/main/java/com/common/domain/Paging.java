@@ -23,7 +23,7 @@ public class Paging<T> {
 	/**
 	 * 每页的个数
 	 */
-	protected int pageSize = 0;
+	protected int pageSize = 10;
 	/**
 	 * 排序字段
 	 */
