@@ -27,7 +27,7 @@ import com.common.util.ReflectionUtils;
  * @param <PK>
  */
 @SuppressWarnings("unchecked")
-public class SimpleHibernateDaoImpl<T, PK extends Serializable> {
+public class SimpleHibernateDaoImpl1<T, PK extends Serializable> {
    /**
     * 记录日志
     */
@@ -35,7 +35,7 @@ public class SimpleHibernateDaoImpl<T, PK extends Serializable> {
     /**
      * session工厂
      */
-	@Resource(name = "sessionFactory")
+	@Resource(name = "sessionFactory1")
 	protected SessionFactory sessionFactory;
     
 	/**
@@ -50,7 +50,7 @@ public class SimpleHibernateDaoImpl<T, PK extends Serializable> {
 	 * eg.
 	 * public class UserDao extends SimpleHibernateDao<User, Long>
 	 */
-	public SimpleHibernateDaoImpl() {
+	public SimpleHibernateDaoImpl1() {
 		this.entityClass = ReflectionUtils.getSuperClassGenricType(getClass());
 	}
 
@@ -59,7 +59,7 @@ public class SimpleHibernateDaoImpl<T, PK extends Serializable> {
 	 * eg.
 	 * SimpleHibernateDao<User, Long> userDao = new SimpleHibernateDao<User, Long>(sessionFactory, User.class);
 	 */
-	public SimpleHibernateDaoImpl(final SessionFactory sessionFactory, final Class<T> entityClass) {
+	public SimpleHibernateDaoImpl1(final SessionFactory sessionFactory, final Class<T> entityClass) {
 		this.sessionFactory = sessionFactory;
 		this.entityClass = entityClass;
 	}
@@ -72,7 +72,7 @@ public class SimpleHibernateDaoImpl<T, PK extends Serializable> {
 	 * 采用@Autowired按类型注入SessionFactory,当有多个SesionFactory的时候Override本函数.
 	 * @param sessionFactory
 	 */
-	
+//	@Autowired
 //	public void setSessionFactory(SessionFactory sessionFactory) {
 //		this.sessionFactory = sessionFactory;
 //	}

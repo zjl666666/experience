@@ -2,15 +2,19 @@ package com.ssh.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * 
  * @Description: 人员模型
  * @author zjl
  * @date 2014年10月29日 上午10:30:22
  */
-public class Person {
-	// id
-	private String id;
+@Entity
+@Table(name="person")
+public class Person extends IdEntity{
+	
 	// 姓名
 	private String name;
 	// 年龄
@@ -18,17 +22,9 @@ public class Person {
 	// 出生日期
 	private Date birth;
     
-	private Date modifyTime;
+//	private Date modifyTime;
 	
 	private Long idLong;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -54,13 +50,13 @@ public class Person {
 		this.birth = birth;
 	}
 
-	public Date getModifyTime() {
-		return modifyTime;
-	}
-
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
-	}
+//	public Date getModifyTime() {
+//		return modifyTime;
+//	}
+//
+//	public void setModifyTime(Date modifyTime) {
+//		this.modifyTime = modifyTime;
+//	}
 
 	public Long getIdLong() {
 		return idLong;

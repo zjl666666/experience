@@ -17,10 +17,10 @@ import com.ssh.service.PersonService;
 
 //指定测试用例的运行器 这里是指定了Junit4
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/spring/applicationContext-jdbcJta.xml" })
-public class TestPersonManyDbServiceImpl {
+@ContextConfiguration(locations = { "/spring/applicationContext-hibernate.xml" })
+public class TestPersonManyHibernateServiceImpl {
 
-	@Resource(name = "personManyDbServiceImpl")
+	@Resource(name = "personManyHibernateServiceImpl")
 	private PersonService personService;
 
 	@Test
@@ -29,7 +29,6 @@ public class TestPersonManyDbServiceImpl {
 	// @Rollback(false) //这里设置为false，就让事务不回滚
 	public void testAdd() {
 		Person person = new Person();
-		person.setId(UuidUtil.getUuid());
 		person.setName("zjl");
 		person.setBirth(new Date());
 		person.setAge(12);

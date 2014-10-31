@@ -2,6 +2,8 @@ package com.ssh.dao.impl;
 
 import java.util.Date;
 
+import javax.annotation.Resource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,10 @@ import com.ssh.dao.PersonDao;
 import com.ssh.domain.Person;
 
 @RunWith(SpringJUnit4ClassRunner.class)// 指定测试用例的运行器 这里是指定了Junit4
-@ContextConfiguration(locations = { "/spring/applicationContext.xml" })
+@ContextConfiguration(locations = { "/spring/applicationContext-jdbc.xml" })
 public class TestPersonDaoImpl {
 
-	@Autowired
+	@Resource(name = "personDaoImpl")
 	private PersonDao personDao;
 
 	@Test

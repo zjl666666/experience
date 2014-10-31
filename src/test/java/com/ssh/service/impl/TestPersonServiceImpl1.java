@@ -17,7 +17,7 @@ import com.ssh.service.PersonService;
 
 //指定测试用例的运行器 这里是指定了Junit4
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/spring/applicationContext.xml" })
+@ContextConfiguration(locations = { "/spring/applicationContext-jdbc.xml" })
 public class TestPersonServiceImpl1 {
 
 	@Resource(name = "personServiceImpl1")
