@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--这块等于dao接口的实现 namespace必须和接口的类路径一样 -->
+<mapper namespace="com.ssh.dao.PersonDao">
+
+	<!-- findById必须和接口中的方法名一样 返回一个User 就是刚才的别名 如果不弄别名要连类路径一起写 麻烦 -->
+	<resultMap type="person" id="personResult">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="age" property="age" />
+		<result column="birth" property="birth" />
+	</resultMap>
+
+
+	<resultMap type="paging" id="pagingResult">
+		<collection property="resultList" javaType="ArrayList" ofType="person" resultMap="personResult" />
+	</resultMap>
+
+
+	<!-- 查询的列，公用 -->
+	<sql id="cols">
+		id,name,age,birth
+	</sql>
+
+	<!-- 根据id查询 -->
+	<select id="findById" parameterType="String" resultMap="personResult">
+		select * from person where id=#{id}
+	</select>
+
+
+	<!-- 根据复合条件查询 -->
+	<select id="searchPersons" parameterType="HashMap" resultMap="personResult">
+		select * from person
+		<where>
+			<if test="name!=null and name!='' ">
+				name LIKE CONCAT(CONCAT('%', #{name}),'%')
+			</if>
+			<if test="sex!= null and sex!= '' ">
+				AND age = #{age}
+			</if>
+			<if test="birth!=null">
+				AND birth >= #{birth}
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据复合条件查询  mybatis 不支持重载-->
+	<!-- <select id="searchPersons" parameterType="paging" resultMap="pagingResult"> select * from person </select> -->
+	
+	<!-- 插入一个用户 -->
+	<insert id="addPerson" parameterType="person">
+		insert into person(
+		<include refid="cols" />
+		) values (#{id},#{name},#{age},#{birth})
+	</insert>
+
+
+
+</mapper>

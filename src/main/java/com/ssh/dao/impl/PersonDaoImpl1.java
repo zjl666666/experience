@@ -3,6 +3,9 @@
  */
 package com.ssh.dao.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.common.dao.impl.CommonSimpleJdbcDaoImpl;
@@ -35,6 +38,18 @@ public class PersonDaoImpl1 extends CommonSimpleJdbcDaoImpl1  implements PersonD
 	 */
 	@Override
 	public Paging<Person> searchPersons(Paging<Person> paging) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Person findById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Person> searchPersons(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		return null;
 	}

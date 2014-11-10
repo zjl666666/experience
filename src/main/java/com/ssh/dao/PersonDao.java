@@ -1,5 +1,8 @@
 package com.ssh.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.common.domain.Paging;
 import com.ssh.domain.Person;
 
@@ -25,5 +28,20 @@ public interface PersonDao {
 	 * @return
 	 */
 	public Paging<Person> searchPersons(Paging<Person> paging);
+	
+	
+	/**
+	 * 搜索人员
+	 * @param person
+	 * @return
+	 */
+	public List<Person> searchPersons(Map<String,String> map);
+	
+	/**
+	 * 
+	 * @param 根据id查询人员
+	 * @return
+	 */
+	public Person findById(String id);
 	
 }

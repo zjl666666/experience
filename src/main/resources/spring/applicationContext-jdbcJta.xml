@@ -87,16 +87,4 @@
 		<constructor-arg ref="dataSource1" />
 	</bean>
 
-
-	<!-- mybatis -->
-	<!-- <bean id="sqlSessionFactory1" class="org.mybatis.spring.SqlSessionFactoryBean"> 
-		<property name="dataSource" ref="dataSource1" /> </bean> <bean id="sqlSessionFactory2" 
-		class="org.mybatis.spring.SqlSessionFactoryBean"> <property name="dataSource" 
-		ref="dataSource2" /> </bean> <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
-		<property name="basePackage" value="xx.xx;" /> <property name="sqlSessionFactory" 
-		ref="sqlSessionFactory1" /> </bean> <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
-		<property name="basePackage" value="yy.yy;" /> <property name="sqlSessionFactory" 
-		ref="sqlSessionFactory2" /> </bean> -->
-	<!-- mybatis -->
-
 </beans>

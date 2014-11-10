@@ -52,13 +52,10 @@
 	<logger name="org.logicalcobwebs">
 		<level value="error" />
 	</logger>
-	<logger name="com.qoocc.umicroblog.message">
-		<level value="error" />
-	</logger>
 	<root>
 		<level value="debug" />
-		<!-- appender-ref ref="stdout" / -->
-		<appender-ref ref="logfile" />
+		<appender-ref ref="stdout" />
+		<!-- <appender-ref ref="logfile" /> -->
 	</root>
 </configuration>
 
