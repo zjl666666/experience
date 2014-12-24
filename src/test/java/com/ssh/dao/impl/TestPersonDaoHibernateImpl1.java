@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,7 +21,11 @@ import com.ssh.domain.Person;
 // 指定测试用例的运行器 这里是指定了Junit4
 @ContextConfiguration(locations = { "/spring/applicationContext-hibernate.xml" })
 public class TestPersonDaoHibernateImpl1 {
-
+	/**
+	 * 记录日志
+	 */
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Resource(name = "personDaoHibernateImpl1")
 	private PersonDao personDao;
 
@@ -32,8 +38,14 @@ public class TestPersonDaoHibernateImpl1 {
 		Person person = new Person();
 		person.setName("zjl");
 		person.setBirth(new Date());
-		person.setAge(12);
+		person.setAge(12);	
 		this.personDao.addPerson(person);
+		
+	    person=this.personDao.findById(person.getId());
+		logger.debug("idLong====="+person.getIdLong());
+		logger.debug("id====="+person.getId());
+//		logger.debug("modifyTime====="+person.getModifyTime());
+
 	}
 
 }

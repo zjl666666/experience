@@ -22,9 +22,11 @@ public class Person extends IdEntity{
 	// 出生日期
 	private Date birth;
     
-//	private Date modifyTime;
+	private Date modifyTime;
 	
 	private Long idLong;
+	
+	
 
 	public String getName() {
 		return name;
@@ -50,13 +52,13 @@ public class Person extends IdEntity{
 		this.birth = birth;
 	}
 
-//	public Date getModifyTime() {
-//		return modifyTime;
-//	}
-//
-//	public void setModifyTime(Date modifyTime) {
-//		this.modifyTime = modifyTime;
-//	}
+	public Date getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
 
 	public Long getIdLong() {
 		return idLong;

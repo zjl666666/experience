@@ -10,7 +10,7 @@
 
 	<!--数据源配置 这块用 mysql数据库 -->
 	<environments default="development">
-		<environment id="development">
+		<environment id="qoocc">
 			<transactionManager type="jdbc" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver" />
@@ -19,6 +19,17 @@
 				<property name="password" value="test" />
 			</dataSource>
 		</environment>
+		
+		<environment id="qoocc1">
+			<transactionManager type="jdbc" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://127.0.0.1:3306/qoocc?relaxAutoCommit=true&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true" />
+				<property name="username" value="root" />
+				<property name="password" value="test" />
+			</dataSource>
+		</environment>
+		
 	</environments>
 	
 	<mappers>

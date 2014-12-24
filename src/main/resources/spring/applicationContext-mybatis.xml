@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/data/mongo
+        http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd" default-lazy-init="true" default-autowire="byName">
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath*:/properties/application.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<context:component-scan base-package="com" />
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+
+		<property name="initialSize" value="50" />
+		<property name="maxActive" value="150" />
+		<property name="maxIdle" value="30" />
+		<property name="maxWait" value="1000" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="defaultAutoCommit" value="true" />
+	</bean>
+
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+    
+	<!-- 默认通用的id是SqlSessionFactory，但用MapperScannerConfigurer时会出现无法找到PropertyPlaceholderConfigurer加载的配置的问题-->
+	<bean id="mybatisSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:mybatis/personMapper.xml" />
+		<property name="typeAliases">
+			<array>
+				<value>com.ssh.domain.Person</value>
+				<value>com.common.domain.Paging</value>
+			</array>
+		</property>
+	</bean>
+   
+	<!--  
+	<bean id="personMybatisDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.ssh.dao.PersonMybatisDao" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+    -->
+    
+    
+	<!-- 自动扫描生成dao实例，替代每个dao都配置MapperFactoryBean -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	   <!-- 用自动扫描，一定要value，并且名字不能是sqlSessionFactory,否则会出现找不到PropertyPlaceholderConfigurer配置的问题 -->
+	    <property name="sqlSessionFactoryBeanName" value="mybatisSqlSessionFactory"/>  
+		<property name="basePackage" value="com.ssh.dao" />
+		<!-- 只有实现了指定接口的dao才实例化 -->
+		<property name="markerInterface" value="com.ssh.dao.PersonMybatisBaseDao" />
+	</bean>
+
+</beans>

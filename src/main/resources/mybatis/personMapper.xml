@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--这块等于dao接口的实现 namespace必须和接口的类路径一样 -->
-<mapper namespace="com.ssh.dao.PersonDao">
+<mapper namespace="com.ssh.dao.PersonMybatisDao">
 
 	<!-- findById必须和接口中的方法名一样 返回一个User 就是刚才的别名 如果不弄别名要连类路径一起写 麻烦 -->
 	<resultMap type="person" id="personResult">
@@ -44,16 +44,15 @@
 		</where>
 	</select>
 
-	<!-- 根据复合条件查询  mybatis 不支持重载-->
+	<!-- 根据复合条件查询 mybatis 不支持重载 -->
 	<!-- <select id="searchPersons" parameterType="paging" resultMap="pagingResult"> select * from person </select> -->
-	
+
 	<!-- 插入一个用户 -->
 	<insert id="addPerson" parameterType="person">
 		insert into person(
 		<include refid="cols" />
 		) values (#{id},#{name},#{age},#{birth})
 	</insert>
-
 
 
 </mapper>

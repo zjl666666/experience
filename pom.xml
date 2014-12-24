@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.common</groupId>
 	<artifactId>qoocc</artifactId>
@@ -132,6 +131,14 @@
 		<!-- Struts2包End -->
 		<!-- Hibernate、Spring、Struts2包End -->
 
+		<!-- mybatis spring集成包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- mybatis spring集成包 -->
+
 		<!-- 数据库相关包 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -163,13 +170,13 @@
 		</dependency>
 		<!-- 分布式事务 -->
 
-       <!-- mybatis 数据映射库配置 -->
+		<!-- mybatis 数据映射库配置 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.2.8</version>
 		</dependency>
-		 <!-- mybatis 数据映射库配置 -->
+		<!-- mybatis 数据映射库配置 -->
 	</dependencies>
 	<!-- 包依赖配置 -->
 

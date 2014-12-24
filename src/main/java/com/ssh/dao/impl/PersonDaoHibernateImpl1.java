@@ -45,13 +45,11 @@ public class PersonDaoHibernateImpl1 extends HibernateDaoImpl1<Person, String> i
 
 	@Override
 	public Person findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	  return this.get(id);
 	}
 
 	@Override
 	public List<Person> searchPersons(Map<String, String> map) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

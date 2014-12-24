@@ -36,8 +36,9 @@ public class TestPersonDaoMybatis {
 	private  SqlSessionFactory getSessionFactory() {
 		SqlSessionFactory sessionFactory = null;
 		String resource = "mybatis/configuration.xml";
+		String dataSourceName="qoocc";
 		try {
-			sessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsReader(resource));
+			sessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsReader(resource),dataSourceName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
