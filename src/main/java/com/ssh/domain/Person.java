@@ -40,6 +40,8 @@ public class Person extends IdEntity{
 	public void setPersonNews(List<PersonNews> personNews) {
 		this.personNews = personNews;
 	}
+	
+	
 
 	public String getName() {
 		return name;
