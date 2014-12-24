@@ -107,6 +107,10 @@
 	</select>
 
 
+	<!-- 根据复合条件查询 mybatis 不支持重载 -->
+	<!-- <select id="searchPersons" parameterType="paging" resultMap="pagingResult"> select * from person </select> -->
+
+
 	<!-- 插入一个用户 -->
 	<insert id="addPerson" parameterType="person">
 		insert into person(
