@@ -37,6 +37,23 @@ public interface PersonMybatisDao extends PersonMybatisBaseDao{
 	 */
 	public List<Person> searchPersons(Map<String,String> map);
 	
+	
+	/**
+	 * 搜索人员,关联查询相关的新闻
+	 * @param person
+	 * @return
+	 */
+	public List<Person> searchPersonsAssociation(Map<String,String> map);
+	
+	
+	/**
+	 * 搜索人员,关联查询相关的新闻
+	 * @param person
+	 * @return
+	 */
+	public List<Person> searchPersonsByPage(Map<String,Object> map);
+	
+	
 	/**
 	 * 
 	 * @param 根据id查询人员

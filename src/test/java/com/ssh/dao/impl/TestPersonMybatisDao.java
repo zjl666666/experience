@@ -16,10 +16,11 @@ import org.slf4j.LoggerFactory;
 
 import com.common.domain.Paging;
 import com.common.util.UuidUtil;
-import com.ssh.dao.PersonDao;
+import com.ssh.dao.PersonMybatisDao;
 import com.ssh.domain.Person;
+import com.ssh.domain.PersonNews;
 
-public class TestPersonDaoMybatis {
+public class TestPersonMybatisDao{
 
 	/**
 	 * 记录日志
@@ -50,13 +51,13 @@ public class TestPersonDaoMybatis {
 		SqlSession sqlSession =null;
 		try{
 			sqlSession=getSessionFactory().openSession();
-			PersonDao personDao = sqlSession.getMapper(PersonDao.class);
+			PersonMybatisDao PersonMybatisDao = sqlSession.getMapper(PersonMybatisDao.class);
 			Person person = new Person();
 			person.setId(UuidUtil.getUuid());
 			person.setName("zjl");
 			person.setBirth(new Date());
 			person.setAge(12);
-			personDao.addPerson(person);
+			PersonMybatisDao.addPerson(person);
 			sqlSession.commit();
 		}finally{
 			sqlSession.close();
@@ -68,9 +69,9 @@ public class TestPersonDaoMybatis {
 		SqlSession sqlSession =null;
 		try{
 			sqlSession=getSessionFactory().openSession();
-			PersonDao personDao = sqlSession.getMapper(PersonDao.class);
+			PersonMybatisDao PersonMybatisDao = sqlSession.getMapper(PersonMybatisDao.class);
 		    String id="98048017beb04a1a91e5d4553b0c798c";
-		    Person person=personDao.findById(id);
+		    Person person=PersonMybatisDao.findById(id);
 		    logger.debug("person name====================="+person.getName());
 		}finally{
 			sqlSession.close();
@@ -82,13 +83,19 @@ public class TestPersonDaoMybatis {
 		SqlSession sqlSession =null;
 		try{
 			sqlSession=getSessionFactory().openSession();
-			PersonDao personDao = sqlSession.getMapper(PersonDao.class);
+			PersonMybatisDao PersonMybatisDao = sqlSession.getMapper(PersonMybatisDao.class);
 		    String id="98048017beb04a1a91e5d4553b0c798c";
 		    Map<String,String> map=new HashMap<String,String>();
 		    map.put("name", "zjl");
-		    List<Person> persons=personDao.searchPersons(map);
+		    List<Person> persons=PersonMybatisDao.searchPersons(map);
 		    for(Person person:persons){
 		    	logger.debug("person name====================="+person.getName());
+		    	List<PersonNews> personNews=person.getPersonNews();
+		    	if(personNews!=null){
+		    		for(PersonNews personNew:personNews){
+		    			logger.debug("personNew name====================="+personNew.getNewsName());
+		    		}
+		    	}
 		    }
 		}finally{
 			sqlSession.close();
@@ -96,17 +103,70 @@ public class TestPersonDaoMybatis {
 	}
 	
 	@Test
+	public  void  testSearchPersonsAssociation() {
+		SqlSession sqlSession =null;
+		try{
+			sqlSession=getSessionFactory().openSession();
+			PersonMybatisDao PersonMybatisDao = sqlSession.getMapper(PersonMybatisDao.class);
+		    String id="98048017beb04a1a91e5d4553b0c798c";
+		    Map<String,String> map=new HashMap<String,String>();
+		    map.put("name", "zjl");
+		    List<Person> persons=PersonMybatisDao.searchPersonsAssociation(map);
+		    for(Person person:persons){
+		    	logger.debug("person name====================="+person.getName());
+		    	List<PersonNews> personNews=person.getPersonNews();
+		    	if(personNews!=null){
+		    		for(PersonNews personNew:personNews){
+		    			logger.debug("personNew name====================="+personNew.getNewsName());
+		    		}
+		    	}
+		    }
+		}finally{
+			sqlSession.close();
+		}
+	}
+	
+	
+	@Test
 	public  void  testSearchPersonsByPaging() {
 		SqlSession sqlSession =null;
 		try{
 			sqlSession=getSessionFactory().openSession();
-			PersonDao personDao = sqlSession.getMapper(PersonDao.class);
+			PersonMybatisDao PersonMybatisDao = sqlSession.getMapper(PersonMybatisDao.class);
 		    String id="98048017beb04a1a91e5d4553b0c798c";
 		    Paging<Person> paging=new Paging<Person>();
-		    Paging<Person> persons=personDao.searchPersons(paging);
+		    Paging<Person> persons=PersonMybatisDao.searchPersons(paging);
 //		    for(Person person:persons.getResultList()){
 //		    	logger.debug("person name====================="+person.getName());
 //		    }
+		}finally{
+			sqlSession.close();
+		}
+	}
+	
+	
+	
+	@Test
+	public  void  testSearchPersonsByPage() {
+		SqlSession sqlSession =null;
+		try{
+			sqlSession=getSessionFactory().openSession();
+			PersonMybatisDao PersonMybatisDao = sqlSession.getMapper(PersonMybatisDao.class);
+		    String id="98048017beb04a1a91e5d4553b0c798c";
+		    Map<String,Object> map=new HashMap<String,Object>();
+		    map.put("name", "zjl");
+		    map.put("begin", 0);
+		    map.put("end", 3);
+		    List<Person> persons=PersonMybatisDao.searchPersonsByPage(map);
+		    for(Person person:persons){
+		    	logger.debug("person name====================="+person.getName());
+		    	List<PersonNews> personNews=person.getPersonNews();
+		    	if(personNews!=null){
+		    		for(PersonNews personNew:personNews){
+		    			logger.debug("personNew name====================="+personNew.getNewsName());
+		    		}
+		    	}
+		    }
 		}finally{
 			sqlSession.close();
 		}

@@ -1,6 +1,7 @@
 package com.ssh.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -26,7 +27,16 @@ public class Person extends IdEntity{
 	
 	private Long idLong;
 	
+	private List<PersonNews> personNews;
 	
+
+	public List<PersonNews> getPersonNews() {
+		return personNews;
+	}
+
+	public void setPersonNews(List<PersonNews> personNews) {
+		this.personNews = personNews;
+	}
 
 	public String getName() {
 		return name;

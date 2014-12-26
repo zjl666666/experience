@@ -3,18 +3,43 @@
 <!--这块等于dao接口的实现 namespace必须和接口的类路径一样 -->
 <mapper namespace="com.ssh.dao.PersonMybatisDao">
 
+	<!-- 关联查询第一种方式，不通过关联查询的sql语句进行，适合循环的记录较少的情况下 -->
 	<!-- findById必须和接口中的方法名一样 返回一个User 就是刚才的别名 如果不弄别名要连类路径一起写 麻烦 -->
+	<resultMap type="person" id="personNoAssociationResult">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="age" property="age" />
+		<result column="birth" property="birth" />
+		<collection property="personNews" select="selectPersonNewsById" column="id" ofType="personNews"></collection>
+	</resultMap>
+	<resultMap type="personNews" id="personNewsNoAssociationResult">
+		<id column="id" property="id" />
+		<result column="news_name" property="newsName" />
+		<association property="person" javaType="person" column="person_id" select="selectPersonById" />
+	</resultMap>
+	<select id="selectPersonNewsById" parameterType="String" resultMap="personNewsNoAssociationResult"> select * from person_news
+		where person_id=#{id}
+	</select>
+	<select id="selectPersonById" parameterType="String" resultMap="personNoAssociationResult"> select * from person where id=#{id} </select>
+	<!-- 关联查询第一种方式，不通过关联查询的sql语句进行 ，适合循环的记录较少的情况下 -->
+
+
+	<!-- 关联查询第一种方式，通过关联查询的sql语句进行，适合循环的记录较多的情况，但关联查询性能较差 -->
 	<resultMap type="person" id="personResult">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
 		<result column="age" property="age" />
 		<result column="birth" property="birth" />
+		<collection  property="personNews" resultMap="personNewsResult" />
 	</resultMap>
 
-
-	<resultMap type="paging" id="pagingResult">
-		<collection property="resultList" javaType="ArrayList" ofType="person" resultMap="personResult" />
+	<resultMap type="personNews" id="personNewsResult">
+	    <!-- 因为person，personNews id名称相同，查询语句如果不特别指定别名 ，系统默认为id1,否则会出现查询结构异常-->
+		<id column="id1" property="id" />
+		<result column="news_name" property="newsName" />
+		<association property="person" resultMap="personResult" />
 	</resultMap>
+	<!-- 关联查询第一种方式，不通过关联查询的sql语句进行，适合循环的记录较多的情况，但关联查询性能较差 -->
 
 
 	<!-- 查询的列，公用 -->
@@ -29,7 +54,7 @@
 
 
 	<!-- 根据复合条件查询 -->
-	<select id="searchPersons" parameterType="HashMap" resultMap="personResult">
+	<select id="searchPersons" parameterType="HashMap" resultMap="personNoAssociationResult">
 		select * from person
 		<where>
 			<if test="name!=null and name!='' ">
@@ -43,9 +68,44 @@
 			</if>
 		</where>
 	</select>
+	
+	
+	<!-- 根据复合条件分页查询 -->
+	<select id="searchPersonsByPage" parameterType="HashMap" resultMap="personNoAssociationResult">
+		select * from person
+		<where>
+			<if test="name!=null and name!='' ">
+				name LIKE CONCAT(CONCAT('%', #{name}),'%')
+			</if>
+			<if test="sex!= null and sex!= '' ">
+				AND age = #{age}
+			</if>
+			<if test="birth!=null">
+				AND birth >= #{birth}
+			</if>
+		</where>
+		limit #{begin},#{end}
+	</select>
+	
+	
 
-	<!-- 根据复合条件查询 mybatis 不支持重载 -->
-	<!-- <select id="searchPersons" parameterType="paging" resultMap="pagingResult"> select * from person </select> -->
+	<!-- 根据复合条件关联查询查询 -->
+	<select id="searchPersonsAssociation" parameterType="HashMap" resultMap="personResult">
+		select * from person,person_news news
+		<where>
+			person.id=news.person_id
+			<if test="name!=null and name!='' ">
+				AND person.`name` LIKE CONCAT(CONCAT('%', #{name}),'%')
+			</if>
+			<if test="sex!= null and sex!= '' ">
+				AND age = #{age}
+			</if>
+			<if test="birth!=null">
+				AND birth >= #{birth}
+			</if>
+		</where>
+	</select>
+
 
 	<!-- 插入一个用户 -->
 	<insert id="addPerson" parameterType="person">
