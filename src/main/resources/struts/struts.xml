@@ -9,7 +9,7 @@
     -->
     <!-- action 注解约定配置 -->
     <constant name="struts.convention.default.parent.package" value="crud-default"/>
-    <constant name="struts.convention.package.locators.basePackage" value="com.qoocc.admin"/>
+    <constant name="struts.convention.package.locators.basePackage" value="com.ssh"/>
     <constant name="struts.convention.package.locators" value="view"/>
     
 	<!-- 该属性指定Struts 2中的action由Spring容器创建  -->
@@ -23,7 +23,7 @@
 
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 	<constant name="struts.multipart.maxSize" value="1100000000" />
-	<constant name="struts.multipart.saveDir" value="d:/saveDir"/>
+	<constant name="struts.multipart.saveDir" value="d:/logs"/>
 	<constant name="struts.multipart.parser" value="jakarta"></constant>
 	<!-- 默认的视图主题 -->
 	<constant name="struts.ui.theme" value="simple" />
@@ -55,7 +55,7 @@
                  system.glb.message
             </result>
 
-            <result name="global_message">/WEB-INF/content/admin/common/global_message.jsp</result>
+            <result name="global_message">/WEB-INF/content/common/global_message.jsp</result>
         </global-results>
     </package>
 </struts>    
