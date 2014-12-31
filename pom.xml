@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.4</version>
+			<version>4.8.1</version>
 		</dependency>
 		<!-- 测试框架 -->
 
@@ -120,6 +120,13 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
 		<!-- spring 包 end -->
 
 		<!-- Struts2包Start -->
@@ -139,16 +146,10 @@
 			<version>${org.apache.struts.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.struts.xwork</groupId>
-			<artifactId>xwork-core</artifactId>
-			<version>${org.apache.struts.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -216,7 +217,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<skip>false</skip>
+					<skip>true</skip>
 				</configuration>
 				<!-- 测试插件 -->
 			</plugin>
@@ -224,43 +225,6 @@
 	</build>
 	<!-- 构建选项配置 -->
 
-
-	<!-- enforcer插件, 避免被依赖的依赖引入过期的jar? -->
-	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-enforcer-plugin</artifactId>
-		<version>1.3.1</version>
-		<executions>
-			<execution>
-				<id>enforce-banned-dependencies</id>
-				<goals>
-					<goal>enforce</goal>
-				</goals>
-				<configuration>
-					<rules>
-						<requireMavenVersion>
-							<version>3.0.3</version>
-						</requireMavenVersion>
-						<requireJavaVersion>
-							<version>1.6</version>
-						</requireJavaVersion>
-						<bannedDependencies>
-							<searchTransitive>true</searchTransitive>
-							<excludes>
-								<exclude>commons-logging</exclude>
-								<exclude>aspectj:aspectj*</exclude>
-								<!-- <exclude>org.springframework</exclude> -->
-							</excludes>
-							<includes>
-								<!-- <include>org.springframework:*:4.0.*</include> -->
-							</includes>
-						</bannedDependencies>
-					</rules>
-					<fail>true</fail>
-				</configuration>
-			</execution>
-		</executions>
-	</plugin>
 
 	<!-- 全局属性配置 -->
 	<properties>

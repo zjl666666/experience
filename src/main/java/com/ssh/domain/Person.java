@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * 
@@ -27,9 +28,11 @@ public class Person extends IdEntity{
 	
 	private Long idLong;
 	
+	@Transient
 	private List<PersonNews> personNews;
 	
-
+	
+	@Transient
 	public List<PersonNews> getPersonNews() {
 		return personNews;
 	}

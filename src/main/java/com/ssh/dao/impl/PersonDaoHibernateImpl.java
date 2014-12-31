@@ -39,8 +39,7 @@ public class PersonDaoHibernateImpl extends HibernateDaoImpl<Person, String> imp
 	 */
 	@Override
 	public Paging<Person> searchPersons(Paging<Person> paging) {
-		
-		return paging;
+		return this.findByCriteria(paging);
 	}
 
 	@Override

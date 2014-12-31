@@ -3,17 +3,10 @@
 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<!--新闻 -->
-	<package name="news" namespace="/news" extends="struts-default">
-		<!-- 新版本行业接口-->
-		<global-results>
-			<result name="error" >/WEB-INF/contentPage/common/notOpentView.jsp</result>
-			<result name="sendRedirect">/WEB-INF/contentPage/common/null.jsp</result>
-		</global-results>
-		
-			<!--标签新闻接口 -->
-			<action name="tagSearchAction" class="com.qoocc.news.list.industry.view.TagSearchAction">
-				<result name="tagIndustry">/WEB-INF/contentPage/list/tagListView.jsp</result>
+	<package name="demo" namespace="/demo" extends="struts-default">
+	    
+			<action name="personAction" class="com.ssh.view.PersonAction">
+				<result name="list">/WEB-INF/demo/demo.jsp</result>
 			</action>
 		
 	</package>
