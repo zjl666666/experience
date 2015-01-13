@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ssh.dao.impl;
+package com.mongodb.dao.impl;
 
 import java.net.UnknownHostException;
 

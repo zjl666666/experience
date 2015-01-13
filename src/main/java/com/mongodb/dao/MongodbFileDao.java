@@ -1,4 +1,4 @@
-package com.ssh.dao;
+package com.mongodb.dao;
 
 /**
  * 
