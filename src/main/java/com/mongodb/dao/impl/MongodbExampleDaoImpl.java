@@ -3,14 +3,15 @@
  */
 package com.mongodb.dao.impl;
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.xwork.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
-import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import com.mongodb.dao.MongodbExampleDao;
 import com.mongodb.domain.Person;
