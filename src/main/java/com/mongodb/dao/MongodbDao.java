@@ -1,12 +1,12 @@
-package com.ssh.dao;
+package com.mongodb.dao;
 
 import java.util.List;
 
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import com.mongodb.domain.FileObject;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
-import com.ssh.domain.FileObject;
 
 /**
  * mongodbDao操作

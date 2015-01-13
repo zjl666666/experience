@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ssh.dao.impl;
+package com.mongodb.dao.impl;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
+import com.mongodb.dao.MongodbDao;
+import com.mongodb.domain.FileObject;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
-import com.ssh.dao.MongodbDao;
-import com.ssh.domain.FileObject;
 
 /**
  * mongo抽象实现

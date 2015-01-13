@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ssh.domain;
+package com.mongodb.domain;
 
 import java.io.InputStream;
 import java.util.Date;
