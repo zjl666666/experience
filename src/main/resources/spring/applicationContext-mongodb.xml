@@ -21,5 +21,17 @@
 		<constructor-arg name="databaseName" value="test" />
 	</bean>
 
+	<!-- 配置gridfs 模板 -->
+	<mongo:db-factory id="mongoDbFactory" dbname="test" mongo-ref="mongo1" />
+
+	<mongo:mapping-converter id="converter" />
+
+	<bean id="gridFsTemplate" class="org.springframework.data.mongodb.gridfs.GridFsTemplate">
+		<constructor-arg ref="mongoDbFactory" />
+		<constructor-arg ref="converter" />
+	</bean>
+	<!-- 配置gridfs 模板 -->
+
+
 </beans>
 
