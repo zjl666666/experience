@@ -30,8 +30,7 @@ public class Demo {
 
 	static <T> void superType(List<? super T> list, T arg) {
 		list.add(arg);
-		
-		// T arg1=list.get(0);  //因为list持有的是任何的超类型
+		// T arg1=list.get(0);  //因为list持有的是任何的超类型,但传参过来的arg可能容器中类的超类，无法进行直接转换
 	}
 	
 	static <T> void extendsType(List<? extends T> list, T arg) {
