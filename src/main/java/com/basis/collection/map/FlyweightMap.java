@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.basis.collection;
+package com.basis.collection.map;
 
 import java.util.AbstractMap;
 import java.util.Map;
