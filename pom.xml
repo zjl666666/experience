@@ -217,6 +217,15 @@
 			<version>3.2.8</version>
 		</dependency>
 		<!-- mybatis 数据映射库配置 -->
+
+		<!-- RPC 远程调用框架 -->
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+			<version>4.0.33</version>
+		</dependency>
+		<!-- RPC 远程调用框架 -->
+
 	</dependencies>
 	<!-- 包依赖配置 -->
 
