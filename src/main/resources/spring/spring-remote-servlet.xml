@@ -6,6 +6,12 @@
     http://www.springframework.org/schema/mvc   
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
+	<bean id="newsService" class="com.rpc.hessian.server.service.impl.NewsServiceImpl">
+	</bean>
 
+	<bean name="/newsServiceSpring" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="newsService" />
+		<property name="serviceInterface" value="com.rpc.hessian.server.service.NewsService" />
+	</bean>
 
 </beans>
