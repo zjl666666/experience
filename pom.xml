@@ -183,6 +183,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.31</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.12.3</version>
+		</dependency>
+
 		<!-- 数据库相关包 -->
 
 
@@ -210,6 +217,15 @@
 			<version>3.2.8</version>
 		</dependency>
 		<!-- mybatis 数据映射库配置 -->
+
+		<!-- RPC 远程调用框架 -->
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+			<version>4.0.33</version>
+		</dependency>
+		<!-- RPC 远程调用框架 -->
+
 	</dependencies>
 	<!-- 包依赖配置 -->
 
