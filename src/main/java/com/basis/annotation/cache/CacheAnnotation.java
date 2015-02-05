@@ -1,4 +1,4 @@
-package com.basis.annotation;
+package com.basis.annotation.cache;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
