@@ -45,7 +45,6 @@
 		<property name="typeAliases">
 			<array>
 				<value>com.ssh.domain.Person</value>
-				<value>com.common.domain.Paging</value>
 				<value>com.ssh.domain.PersonNews</value>
 			</array>
 		</property>
