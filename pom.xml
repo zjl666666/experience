@@ -232,6 +232,7 @@
 		</dependency>
 		<!-- RPC 远程调用框架 -->
 
+
 		<!-- 阿里微服务框架 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -251,6 +252,15 @@
 			<artifactId>zkclient</artifactId>
 			<version>0.1</version>
 		</dependency>
+
+
+		<!-- 加入mq 消息服务器 -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-client</artifactId>
+			<version>5.9.1</version>
+		</dependency>
+		<!-- 加入mq 消息服务器 -->
 
 	</dependencies>
 	<!-- 包依赖配置 -->

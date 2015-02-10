@@ -28,7 +28,9 @@
 		</layout>
 	</appender>
 
-
+	<logger name="com.mq.activemq">
+		<level value="debug" />
+	</logger>
 
 	<logger name="org.apache.zookeeper">
 		<level value="error" />
@@ -59,7 +61,7 @@
 		<level value="error" />
 	</logger>
 	<root>
-		<level value="debug" />
+		<level value="error" />
 		<appender-ref ref="stdout" />
 		<!-- <appender-ref ref="logfile" /> -->
 	</root>
