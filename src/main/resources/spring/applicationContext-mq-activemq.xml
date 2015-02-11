@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="com.mq" />
+
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- 此处地址需要与启动的jms服务中的配置文件中activemq.xml中的 <transportConnector name="openwire" uri="tcp://192.168.1.100:61616"中的端口指定一致/>配置 -->
+		<property name="brokerURL" value="tcp://192.168.20.126:61616" />
+		<!-- <property name="brokerURL" value="tcp://localhost:61616" /> -->
+		<!-- <property name="userName" value="system" /> <property name="password" value="manager"/> -->
+		<!-- 对PERSISTENT的消息进行同步发送(NON_PERSISTENT消息默认异步发送) -->
+		<property name="useAsyncSend" value="true" />
+	</bean>
+
+	<bean id="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="connectionFactory" />
+		<property name="sessionCacheSize" value="10" />
+	</bean>
+
+	<!-- Spring queue JMS Template -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cachingConnectionFactory" />
+		<!-- 使 deliveryMode, priority, timeToLive设置生效 <property name="explicitQosEnabled" value="true" /> -->
+		<!-- 设置NON_PERSISTENT模式, 默认为PERSISTENT -->
+		<property name="deliveryPersistent" value="false" />
+		<!-- 设置优先级, 默认为4 -->
+		<property name="priority" value="9" />
+	</bean>
+
+	<!-- Spring topic JMS Template -->
+	<bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cachingConnectionFactory" />
+		<!-- 使 deliveryMode, priority, timeToLive设置生效 <property name="explicitQosEnabled" value="true" /> -->
+		<!-- 设置NON_PERSISTENT模式, 默认为PERSISTENT -->
+		<property name="deliveryPersistent" value="false" />
+		<!-- 设置优先级, 默认为4 -->
+		<property name="priority" value="9" />
+		<property name="pubSubDomain" value="true" />
+	</bean>
+
+
+	<!-- 用户订阅行为记录的相关JMS配置 -->
+	<bean id="channelSubBehaviorQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="q.channel.sub.behavior.phone1" />
+	</bean>
+
+
+	<bean id="channelSubBehaviorQueueContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="cachingConnectionFactory" />
+		<property name="destination" ref="channelSubBehaviorQueue" />
+		<property name="messageListener" ref="channelSubBehaviorMessageListener" />
+		<property name="concurrentConsumers" value="5" />
+		<property name="maxConcurrentConsumers" value="10" />
+	</bean>
+	<!-- 用户订阅行为记录的相关JMS配置 -->
+
+
+	<!-- 用户订阅行为记录的相关JMS配置 pub/sub模式 -->
+	<bean id="channelSubBehaviorTopic" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="t.channel.sub.behavior.phone1" />
+	</bean>
+
+	<bean id="channelSubBehaviorTopicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="cachingConnectionFactory" />
+		<property name="destination" ref="channelSubBehaviorTopic" />
+		<property name="messageListener" ref="channelSubBehaviorTopicMessageListener" />
+		
+	</bean>
+
+
+</beans>
