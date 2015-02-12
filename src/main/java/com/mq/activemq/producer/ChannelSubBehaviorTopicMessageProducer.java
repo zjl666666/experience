@@ -21,7 +21,6 @@ import com.mq.activemq.domain.ChannelSubBehavior;
  * 
  */
 @Service
-@Transactional(isolation = Isolation.READ_UNCOMMITTED)
 public class ChannelSubBehaviorTopicMessageProducer {
 	private static Logger logger = LoggerFactory.getLogger(ChannelSubBehaviorTopicMessageProducer.class);
 	/**

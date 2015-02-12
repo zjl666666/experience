@@ -14,8 +14,8 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 public class ActivemqTopicProducer {
 
 	private final String address = "tcp://192.168.20.126:61616";
-	
-	private final String topicName = "testTopic";
+
+	private final String topicName = "t.channel.sub.behavior.phone2";
 
 	// ConnectionFactory ：连接工厂，JMS 用它创建连接
 	ConnectionFactory connectionFactory;
@@ -49,7 +49,7 @@ public class ActivemqTopicProducer {
 			// 设置不持久化，此处学习，实际根据项目决定
 			producer.setDeliveryMode(DeliveryMode.PERSISTENT);
 			// 构造消息，此处写死，项目就是参数，或者方法获取
-			sendMessage(session, producer,message);
+			sendMessage(session, producer, message);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,8 +63,10 @@ public class ActivemqTopicProducer {
 		}
 	}
 
-	private void sendMessage(Session session, MessageProducer producer,String sendMessage) throws Exception {
+	private void sendMessage(Session session, MessageProducer producer, String sendMessage) throws Exception {
 		TextMessage message = session.createTextMessage(sendMessage);
+		// 设置JMSXGroupID属性，可以保证相同的groupID的消息发送到同一个consumer从而保证多个consumer并发时的接收顺序，但如果重启或者failover到其他的broker，将重新设置接收的consumer
+		message.setStringProperty("JMSXGroupID", "IBM_NASDAQ_20/4/05");
 		// 发送消息到目的地方
 		producer.send(message);
 	}

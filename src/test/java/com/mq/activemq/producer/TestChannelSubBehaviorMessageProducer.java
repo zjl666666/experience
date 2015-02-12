@@ -26,7 +26,7 @@ public class TestChannelSubBehaviorMessageProducer {
 	@Test
 	public void testSendMessage() throws Exception{
 		
-		while(true){
+//		while(true){
 			ChannelSubBehavior channelSubBehavior=new ChannelSubBehavior();
 			channelSubBehavior.setChannelType(1);
 			channelSubBehavior.setId("1");
@@ -37,12 +37,11 @@ public class TestChannelSubBehaviorMessageProducer {
 			
 			List<ChannelSubBehavior> channelSubBehaviors=new ArrayList<ChannelSubBehavior>();
 			channelSubBehaviors.add(channelSubBehavior);
-			channelSubBehaviors.add(channelSubBehavior1);
 			
 			channelSubBehaviorMessageProducer.sendMessage(channelSubBehaviors);
 		    
-			Thread.sleep(1L);
-		}
+			Thread.sleep(100000L);
+//		}
 		
 	}
 }

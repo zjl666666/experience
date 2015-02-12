@@ -16,7 +16,7 @@ public class TestActivemqTopicProducer {
 
 	@Test
 	public void sendMessage(){
-		String message="测试主题发送消息";
+		String message="测试持久订阅主题发送消息";
 		
 		
 		ActivemqTopicProducer producer=new ActivemqTopicProducer();

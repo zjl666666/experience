@@ -23,7 +23,7 @@ import com.mq.activemq.domain.ChannelSubBehavior;
  * 
  */
 @Service
-@Transactional(isolation =Isolation.READ_UNCOMMITTED)
+@Transactional
 public class ChannelSubBehaviorMessageListener implements MessageListener {
 	private static Logger logger = LoggerFactory.getLogger(ChannelSubBehaviorMessageListener.class);
 

@@ -18,14 +18,21 @@
 		<property name="sessionCacheSize" value="10" />
 	</bean>
 
+	<!-- 添加事务 -->
+	<bean id="jmsTransactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
+		<property name="connectionFactory" ref="connectionFactory" />
+	</bean>
+
 	<!-- Spring queue JMS Template -->
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="cachingConnectionFactory" />
 		<!-- 使 deliveryMode, priority, timeToLive设置生效 <property name="explicitQosEnabled" value="true" /> -->
 		<!-- 设置NON_PERSISTENT模式, 默认为PERSISTENT -->
-		<property name="deliveryPersistent" value="false" />
+		<property name="deliveryPersistent" value="true" />
 		<!-- 设置优先级, 默认为4 -->
 		<property name="priority" value="9" />
+		<!-- 设置事务如果失败，下次可重新接收 -->
+		<property name="sessionTransacted" value="true" />
 	</bean>
 
 	<!-- Spring topic JMS Template -->
@@ -50,8 +57,11 @@
 		<property name="connectionFactory" ref="cachingConnectionFactory" />
 		<property name="destination" ref="channelSubBehaviorQueue" />
 		<property name="messageListener" ref="channelSubBehaviorMessageListener" />
+		<!-- 不应该在Destination为Topic的时候使用多个MessageConsumer，这是因为多个MessageConsumer会接收到同样的消息。 -->
 		<property name="concurrentConsumers" value="5" />
 		<property name="maxConcurrentConsumers" value="10" />
+		<!-- 设置事务如果失败，下次可重新接收 -->
+		<property name="sessionTransacted" value="true" />
 	</bean>
 	<!-- 用户订阅行为记录的相关JMS配置 -->
 
@@ -61,11 +71,29 @@
 		<constructor-arg value="t.channel.sub.behavior.phone1" />
 	</bean>
 
-	<bean id="channelSubBehaviorTopicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="cachingConnectionFactory" />
+	<!-- 消息监听器 用spring 的适配器完全解耦，监听器没有JMS相关的API -->
+	<bean id="channelSubBehaviorTopicMessageListenerAdapterListener" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<constructor-arg ref="channelSubBehaviorTopicMessageListenerAdapter" />
+		<!-- 接收消息的方法名称 -->
+		<property name="defaultListenerMethod" value="receiveMessage" />
+	</bean>
+
+	<bean id="channelSubBehaviorTopicContainer" class="org.springframework.jms.listener.SimpleMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="channelSubBehaviorTopic" />
-		<property name="messageListener" ref="channelSubBehaviorTopicMessageListener" />
-		
+		<property name="messageListener" ref="channelSubBehaviorTopicMessageListenerAdapterListener" />
+		<property name="subscriptionDurable" value="true" />
+		<property name="clientId" value="qoocc_clientId_001" />
+		<!-- 这里是设置接收客户端的ID，在持久化时，但这个客户端不在线时，消息就存在数据库里，知道被这个ID的客户端消费掉 -->
+	</bean>
+
+	<bean id="channelSubBehaviorTopicContainer2" class="org.springframework.jms.listener.SimpleMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="channelSubBehaviorTopic" />
+		<property name="messageListener" ref="channelSubBehaviorTopicMessageListenerAdapterListener" />
+		<property name="subscriptionDurable" value="true" />
+		<property name="clientId" value="qoocc_clientId_002" />
+		<!-- 这里是设置接收客户端的ID，在持久化时，但这个客户端不在线时，消息就存在数据库里，知道被这个ID的客户端消费掉 -->
 	</bean>
 
 

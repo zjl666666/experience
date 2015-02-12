@@ -16,4 +16,6 @@ public class TestActivemqConsumer {
 		
 		logger.debug("result====="+result);
 	}
+	
+
 }

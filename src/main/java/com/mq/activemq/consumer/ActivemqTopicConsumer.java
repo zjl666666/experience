@@ -2,13 +2,14 @@ package com.mq.activemq.consumer;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import javax.jms.Topic;
+import javax.jms.TopicSubscriber;
 
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -20,7 +21,9 @@ public class ActivemqTopicConsumer {
 
 	private final String address = "tcp://192.168.20.126:61616";
 
-	private final String topicName = "testTopic";
+	private final String topicName = "t.channel.sub.behavior.phone2";
+	
+	private final String clientID="activemq_topic_1";
 
 	// ConnectionFactory ：连接工厂，JMS 用它创建连接
 	ConnectionFactory connectionFactory;
@@ -29,7 +32,7 @@ public class ActivemqTopicConsumer {
 	// Session： 一个发送或接收消息的线程
 	Session session;
 	// Destination ：消息的目的地;消息发送给谁.
-	Destination destination;
+	Topic destination;
 	// 消费者，消息接收者
 	MessageConsumer consumer;
 
@@ -43,13 +46,14 @@ public class ActivemqTopicConsumer {
 		try {
 			// 构造从工厂得到连接对象
 			connection = connectionFactory.createConnection();
+			connection.setClientID(clientID);
 			// 启动
 			connection.start();
-			// 获取操作连接
+			// 获取操作连接,第一个参数表示是否开启事务，第二个是签收模式
 			session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
 			// 获取session注意参数值xingbo.xu-queue是一个服务器的queue，须在在ActiveMq的console配置
-			destination = session.createTopic(topicName); 
-			consumer = session.createConsumer(destination);
+			destination = session.createTopic(topicName);  
+			TopicSubscriber  topicSubscriber= session.createDurableSubscriber(destination, "activemq_test"); 
 			
 			//阻塞的方式获取
 //			while (true) {
@@ -64,7 +68,7 @@ public class ActivemqTopicConsumer {
 //			}
 			
 			//监听的方式获取
-			consumer.setMessageListener(new MessageListener() {
+			topicSubscriber.setMessageListener(new MessageListener() {
 				public void onMessage(Message message) {
 					TextMessage tm = (TextMessage) message;
 					try {

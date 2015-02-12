@@ -15,7 +15,7 @@ public class ActivemqProducer {
 
 	private final String address = "tcp://192.168.20.126:61616";
 	
-	private final String queueName = "testQueue";
+	private final String queueName = "q.channel.sub.behavior.phone1";
 
 	// ConnectionFactory ：连接工厂，JMS 用它创建连接
 	ConnectionFactory connectionFactory;
