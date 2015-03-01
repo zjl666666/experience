@@ -25,5 +25,6 @@ public class TestDemoAction {
 	@Test
 	public void testStart() throws Exception {
 		demoAction.start();
+		Thread.sleep(1000000l);
 	}
 }
