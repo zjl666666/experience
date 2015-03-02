@@ -31,7 +31,11 @@
 	<logger name="com.mq.activemq">
 		<level value="debug" />
 	</logger>
-
+    
+	<logger name="com.cache">
+		<level value="debug" />
+	</logger>
+	
 	<logger name="org.apache.zookeeper">
 		<level value="error" />
 	</logger>

@@ -15,7 +15,7 @@ package com.cache.common.util;
 	public class RedisCachedUtilDemo {   
 	  
 	    public void test1(){   
-	        Jedis  redis = new Jedis ("192.168.10.64",6379);//连接redis   
+	        Jedis  redis = new Jedis ("192.168.20.126",6379);//连接redis   
 	        redis.auth("redis");//验证密码   
 	        /* -----------------------------------------------------------------------------------------------------------  */         
 	        /**  KEY操作  
@@ -67,7 +67,9 @@ package com.cache.common.util;
 	             
 	        */  
 	       /* -----------------------------------------------------------------------------------------------------------  */         
-	       /**  STRING 操作  
+
+	        redis.set("name", "wangjun1");  
+	        /**  STRING 操作  
 	         
 	       //SET key value将字符串值value关联到key。  
 	       redis.set("name", "wangjun1");  
