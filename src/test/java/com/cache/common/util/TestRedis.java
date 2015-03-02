@@ -110,4 +110,5 @@ public class TestRedis {
 		Assert.assertEquals(value1, mgetString.get(1));
 
 	}
+
 }
