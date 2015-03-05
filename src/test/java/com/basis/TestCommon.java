@@ -11,8 +11,14 @@ public class TestCommon {
 	private static final Logger logger = LoggerFactory.getLogger(TestCommon.class);
 
 	public static void main(String[] args) {
+<<<<<<< Upstream, based on basic
 	    char c='中';
 	    System.out.println(c);
+=======
+		List<String> listStr=new LinkedList<String>();
+		listStr.add("test");
+		listStr.add("test1");
+>>>>>>> 9eaeaa9 加入JMX demo
 	}
 
 }
