@@ -138,6 +138,12 @@
 			<artifactId>spring-data-mongodb</artifactId>
 			<version>1.3.2.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.4.2.RELEASE</version>
+		</dependency>
 		<!-- spring 包 end -->
 
 		<!-- Struts2包Start -->
@@ -252,7 +258,7 @@
 			<artifactId>zkclient</artifactId>
 			<version>0.1</version>
 		</dependency>
-        
+
 		<!-- 加入mq 消息服务器 -->
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
@@ -260,7 +266,7 @@
 			<version>5.9.1</version>
 		</dependency>
 		<!-- 加入mq 消息服务器 -->
-		
+
 	</dependencies>
 	<!-- 包依赖配置 -->
 
