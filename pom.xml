@@ -265,6 +265,11 @@
 			<artifactId>activemq-client</artifactId>
 			<version>5.9.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.10</artifactId>
+			<version>0.8.2.0</version>
+		</dependency>
 		<!-- 加入mq 消息服务器 -->
 
 	</dependencies>
