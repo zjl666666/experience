@@ -11,9 +11,8 @@ public class TestCommon {
 	private static final Logger logger = LoggerFactory.getLogger(TestCommon.class);
 
 	public static void main(String[] args) {
-		List<String> listStr=new LinkedList<String>();
-		listStr.add("test");
-		listStr.add("test1");
+	    char c='中';
+	    System.out.println(c);
 	}
 
 }
