@@ -253,11 +253,6 @@
 		</dependency>
 		<!-- 阿里微服务框架 -->
 
-		<dependency>
-			<groupId>com.github.sgroschupf</groupId>
-			<artifactId>zkclient</artifactId>
-			<version>0.1</version>
-		</dependency>
 
 		<!-- 加入mq 消息服务器 -->
 		<dependency>
