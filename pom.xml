@@ -13,7 +13,7 @@
 			<groupId>com.sun</groupId>
 			<artifactId>tools</artifactId>
 			<scope>system</scope>
-			<version>1.6.0</version>
+			<version>1.8.0</version>
 			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
 		</dependency>
 
